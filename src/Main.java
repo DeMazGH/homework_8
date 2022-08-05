@@ -13,8 +13,19 @@ public class Main {
 
         int clientOs = 0;
         int clientPhoneYear = 2018;
-
         System.out.println(chekingPhoneOsAndYear(clientOs, clientPhoneYear));
+
+        //task3
+
+        int deliveryDistance = 11;
+        int deliveryDays = calculateDeliveryDays(deliveryDistance);
+
+        if (deliveryDays == 0) {
+            System.out.println("Доставка не производится.");
+        } else {
+            System.out.println("Потребуется дней: " + deliveryDays);
+        }
+
     }
 
     public static String checkingYearForLeapYear(int year) {
@@ -45,5 +56,17 @@ public class Main {
             return "«Установите версию приложения для Android по ссылке».";
         }
         return null;
+    }
+
+    public static int calculateDeliveryDays(int deliveryDistance) {
+
+        if (deliveryDistance <= 20) {
+            return 1;
+        } else if (deliveryDistance <= 60) {
+            return 2;
+        } else if (deliveryDistance <= 100) {
+            return 3;
+        }
+        return 0;
     }
 }
