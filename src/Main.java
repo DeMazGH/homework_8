@@ -19,12 +19,7 @@ public class Main {
 
         int deliveryDistance = 11;
         int deliveryDays = calculateDeliveryDays(deliveryDistance);
-
-        if (deliveryDays == 0) {
-            System.out.println("Доставка не производится.");
-        } else {
-            System.out.println("Потребуется дней: " + deliveryDays);
-        }
+        System.out.println(printDeliveryMessage(deliveryDays));
 
     }
 
@@ -42,20 +37,16 @@ public class Main {
             return "ОС не распознана";
         }
 
-        boolean isIOS = clientOs == 0;
-        boolean isAndroid = clientOs == 1;
-        boolean isPhoneOld = clientPhoneYear < LocalDate.now().getYear();
-
-        if (isIOS && isPhoneOld) {
+        if (clientOs == 0 && clientPhoneYear < LocalDate.now().getYear()) {
             return "«Установите облегченную версию приложения для iOS по ссылке».";
-        } else if (isIOS && !isPhoneOld) {
+        } else if (clientOs == 0 && !(clientPhoneYear < LocalDate.now().getYear())) {
             return "«Установите версию приложения для iOS по ссылке».";
-        } else if (isAndroid && isPhoneOld) {
+        } else if (clientOs == 1 && clientPhoneYear < LocalDate.now().getYear()) {
             return "«Установите облегченную версию приложения для Android по ссылке».";
-        } else if (isAndroid && !isPhoneOld) {
+        } else if (clientOs == 1 && !(clientPhoneYear < LocalDate.now().getYear())) {
             return "«Установите версию приложения для Android по ссылке».";
         }
-        return null;
+        return "Ошибка, вы не можете установить приложение. Для уточнения обратитесь в тех. поддержку";
     }
 
     public static int calculateDeliveryDays(int deliveryDistance) {
@@ -67,6 +58,14 @@ public class Main {
         } else if (deliveryDistance <= 100) {
             return 3;
         }
-        return 0;
+        return -1;
+    }
+
+    public static String printDeliveryMessage(int deliveryDays) {
+        if (deliveryDays == -1) {
+            return "Доставка не производится.";
+        } else {
+            return "Потребуется дней: " + deliveryDays;
+        }
     }
 }
