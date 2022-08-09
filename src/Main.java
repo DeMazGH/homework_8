@@ -17,7 +17,7 @@ public class Main {
 
         //task3
 
-        int deliveryDistance = 11;
+        int deliveryDistance = 88;
         int deliveryDays = calculateDeliveryDays(deliveryDistance);
         System.out.println(printDeliveryMessage(deliveryDays));
 
@@ -58,14 +58,10 @@ public class Main {
         } else if (deliveryDistance <= 100) {
             return 3;
         }
-        return -1;
+        throw new RuntimeException("Доставка не производится.");
     }
 
     public static String printDeliveryMessage(int deliveryDays) {
-        if (deliveryDays == -1) {
-            return "Доставка не производится.";
-        } else {
             return "Потребуется дней: " + deliveryDays;
-        }
     }
 }
